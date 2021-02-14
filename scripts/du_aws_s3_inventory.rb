@@ -2,10 +2,29 @@
 
 require 'csv'
 require 'du_aws_s3_inventory_gem'
+require 'optparse'
 
-csvf = ARGV[0]
-target_path = (ARGV[1] || nil)
-max_depth = (ARGV[2] || 9999).to_i
+#===
+# Process command-line option 
+#===
+option = {}
+OptionParser.new do |opt|
+  opt.on('-i', '--inventry CSV_FILE', 'S3 invetntry CSV file'){|v| option[:i] = v}
+  opt.on('-d', '--max-depth N', 'max depth'){|v| option[:d] = v}
+  opt.on('-h', '--human-readable'){}
+  opt.on('-a', '--all') {}
+  opt.on('--help', 'show this help'){puts opt; exit}
+  opt.parse!(ARGV)
+end
+
+#p option
+
+#===
+# Main
+#===
+csvf = option[:i]
+target_path = (ARGV[0] || nil)
+max_depth = (option[:d] || 9999).to_i
 data = CSV.read(csvf)
 
 path2size = {}

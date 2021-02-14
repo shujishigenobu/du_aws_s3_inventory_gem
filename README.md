@@ -22,7 +22,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+du_aws_s3_inventory.rb [OPTION]... -i S3InventryCSV [target_prefix]
+
+Summarize S3 bucket usage based on the S3 inventry output in a 
+similar way as UNIX du command.
+ -i, --inventry        S3 invetntry CSV file
+ -h, --human-readable  print sizes in human readable format (e.g., 1K 234M 2G)
+ -d, --max-depth=N     print the total for a directory (or file, with --all)
+                         only if it is N or fewer levels below the command
+                         line argument;  --max-depth=0 is the same as --summarize
+ -a, --all             write counts for all files, not just directories
+ -s, --summarize       display only a total for each argument
+```
 
 ## Development
 
